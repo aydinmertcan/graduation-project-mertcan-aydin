@@ -1,10 +1,15 @@
-const { getRecords } = require("../services/records");
+const RecordService = require("../services/records");
 
 const fetchRecords = async (req, res) => {
   const { minCount, maxCount, startDate, endDate } = req.body;
 
   try {
-    const records = await getRecords(minCount, maxCount, startDate, endDate);
+    const records = await RecordService.getRecords(
+      minCount,
+      maxCount,
+      startDate,
+      endDate
+    );
 
     return res.status(200).json({
       code: 1, // getHttpCode(200),
