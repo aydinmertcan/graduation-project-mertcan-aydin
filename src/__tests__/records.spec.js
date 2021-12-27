@@ -1,4 +1,5 @@
 const request = require("supertest");
+const { HTTP_STATUS_CODES } = require("../constants/httpStatusCodes");
 
 const { app } = require("../app");
 
@@ -12,7 +13,7 @@ describe("Record Endpoints", () => {
     });
     const { code, msg } = res.body;
 
-    expect(res.statusCode).toEqual(200);
+    expect(res.statusCode).toEqual(HTTP_STATUS_CODES.OK);
     expect(code).toEqual(0);
     expect(msg).toEqual("Success");
   });
@@ -24,7 +25,7 @@ describe("Record Endpoints", () => {
       minCount: 400,
       maxCount: 500,
     });
-    expect(res.statusCode).toEqual(404);
+    expect(res.statusCode).toEqual(HTTP_STATUS_CODES.NOT_FOUND);
     expect(res.text).toEqual("not found");
   });
 
@@ -35,7 +36,7 @@ describe("Record Endpoints", () => {
     });
     const { code, msg } = JSON.parse(res.text);
 
-    expect(res.statusCode).toEqual(400);
+    expect(res.statusCode).toEqual(HTTP_STATUS_CODES.BAD_REQUEST);
     expect(code).toEqual(1);
     expect(msg).toEqual("Validation Failed");
   });
