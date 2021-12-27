@@ -3,11 +3,9 @@
 ## Table of Contents
 
 - [Installation](#installation)
+- [Demo Link](#demo)
 - [Getting Started](#getting-started)
-- [Features](#features)
-- [TODO](#todo)
-- [Contributing](#contributing)
-- [License](#license)
+- [Screen Shots](#screen-shots)
 
 ## Installation
 
@@ -24,6 +22,10 @@ $ create .env file, then fill it out
 ```
 
 When the installation completes, open the _http://localhost:3000_`.
+
+## Demo
+
+- [heroku link](https://young-taiga-27146.herokuapp.com/api/v1/records)
 
 ## Getting Started
 
@@ -55,3 +57,17 @@ For that project, we've only one endpoint which is `/api/v1/records`
     ]
 }
 ```
+
+## Screen Shots
+
+- Sample api request and response on Postman
+
+# ![](screenshots/postman1.png)
+
+- Sample bad request to get validation error on Postman
+
+# ![](screenshots/postman2.png)
+
+- Jest + supertest
+
+# ![](screenshots/jest.png)
