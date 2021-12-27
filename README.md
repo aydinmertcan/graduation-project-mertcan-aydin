@@ -21,7 +21,7 @@ $ create .env file, then fill it out
 
 ```
 
-When the installation completes, open the _http://localhost:3000_`.
+When the installation completes, open the http://localhost:3000/api/v1/records`.
 
 ## Demo
 
