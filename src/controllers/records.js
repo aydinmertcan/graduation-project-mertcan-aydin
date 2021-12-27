@@ -1,6 +1,6 @@
 const RecordService = require("../services/records");
 const { getHttpCode } = require("../utils");
-const { HTTP_STATUS_CODES } = require("../constants");
+const { HTTP_STATUS_CODES } = require("../constants/httpStatusCodes");
 
 const fetchRecords = async (req, res) => {
   const { minCount, maxCount, startDate, endDate } = req.body;
