@@ -1,7 +1,11 @@
 const express = require("express");
+const { validate } = require("express-validation");
+const { fetchRecords } = require("../controllers/records");
+const { recordsValidator } = require("../validations");
+const { validateBody } = require("../utils");
+
 const router = express.Router();
 
-const { fetchRecords } = require("../controllers/records");
-router.post("/", fetchRecords);
+router.post("/", validate(recordsValidator), fetchRecords);
 
 module.exports = router;

@@ -20,6 +20,4 @@ const schema = new Schema({
   },
 });
 
-const RecordModel = model(DOCUMENT_NAME, schema);
-
-module.exports = RecordModel;
+module.exports = model(DOCUMENT_NAME, schema);

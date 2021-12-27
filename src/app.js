@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const { validateBody } = require("./utils");
 const routes = require("./routes/index");
 require("dotenv").config();
 
@@ -18,6 +19,7 @@ mongoose
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/api/v1", routes);
+app.use(validateBody);
 
 app.all("*", (req, res) => {
   res.status(404).send("not found");
