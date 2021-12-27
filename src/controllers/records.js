@@ -1,46 +1,23 @@
-const Records = require("../models/records");
+const { getRecords } = require("../services/records");
 
-const fetchRecords = async (requestBody) => {
-  const { minCount, maxCount } = requestBody;
-  const startDate = new Date(requestBody.startDate);
-  const endDate = new Date(requestBody.endDate);
+const fetchRecords = async (req, res) => {
+  const { minCount, maxCount, startDate, endDate } = req.body;
 
-  const records = await Records.aggregate([
-    {
-      $project: {
-        key: 1,
-        createdAt: 1,
-        totalCount: {
-          $reduce: {
-            input: "$counts",
-            initialValue: 0,
-            in: {
-              $sum: ["$$value", "$$this"],
-            },
-          },
-        },
-      },
-    },
-    {
-      $match: {
-        createdAt: {
-          $gte: startDate,
-          $lt: endDate,
-        },
-        totalCount: {
-          $gte: minCount,
-          $lte: maxCount,
-        },
-      },
-    },
-    {
-      $project: {
-        _id: 0,
-      },
-    },
-  ]);
+  try {
+    const records = await getRecords(minCount, maxCount, startDate, endDate);
 
-  return records;
+    return res.status(200).json({
+      code: 1, // getHttpCode(200),
+      msg: "Success",
+      records,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      code: 0, // getHttpCode(500),
+      msg: err?.message ?? "Unable to fetch records",
+      records,
+    });
+  }
 };
 
 module.exports = {
