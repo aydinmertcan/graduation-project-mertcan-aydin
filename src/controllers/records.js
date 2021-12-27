@@ -1,5 +1,6 @@
 const RecordService = require("../services/records");
 const { getHttpCode } = require("../utils");
+const { HTTP_STATUS_CODES } = require("../constants");
 
 const fetchRecords = async (req, res) => {
   const { minCount, maxCount, startDate, endDate } = req.body;
@@ -12,14 +13,14 @@ const fetchRecords = async (req, res) => {
       endDate
     );
 
-    return res.status(200).json({
-      code: getHttpCode(200),
+    return res.status(HTTP_STATUS_CODES.OK).json({
+      code: getHttpCode(HTTP_STATUS_CODES.OK),
       msg: "Success",
       records,
     });
   } catch (err) {
-    return res.status(500).json({
-      code: getHttpCode(500),
+    return res.status(HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR).json({
+      code: getHttpCode(HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR),
       msg: err?.message ?? "Unable to fetch records",
       records,
     });
